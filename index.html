@@ -1,0 +1,76 @@
+<html>
+<head>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src='words1.js'></script>
+	<script src='words2.js'></script>
+	<script src='words3.js'></script>
+	<script src='words4.js'></script>
+	<script src='words5.js'></script>
+	<script src='words6.js'></script>
+	<script src='words7.js'></script>
+	<script src='words8.js'></script>
+	<style>
+		body, div, p, button, span {
+			margin : 0; padding : 0;
+		}
+
+
+		#change {
+			width : 100%;
+			height : 20%;
+			background : none;
+			border : 1px solid black;
+			font-size: 100px;
+		}
+
+		#text {
+			width : 100%;
+			height : 80%;
+			border : 1px solid black;
+			text-align: center;
+			font-size: 100px;
+		}
+
+	</style>
+</head>
+<body>
+<button id='change'>바꾸기</button>
+<p id='text'>
+	단어
+</p>
+
+</body>
+<script>
+	var used = [];
+	var total = 0;
+	var textArea = $("#text");
+
+	function getWord(aset){
+		var number = parseInt(Math.random() * total, 10);
+		var remain = number%18;
+		
+		if(remain === 0){
+			textArea.html("원하는 단어로 사용해주세요");
+		} else {
+			textArea.html(aset[number]);
+		}
+	}
+
+	var MAX = 8;
+	var n = parseInt(location.hash.replace("#card=", ""),10);
+	if(!isNaN(n) && n>=1 && MAX>=n){
+		var data = window["aData"+n];
+		total = data.length;
+		var $btn = $("#change");
+		$btn.click(function(e){
+			e.preventDefault();
+			getWord(data);
+		});
+
+	} else {
+		alert("#card=N (1~8의 숫자를 선택하세요)");
+	}
+
+
+</script>
+</html>
